@@ -5,13 +5,21 @@ export type DeepItemType = {
   [key: string]: { before: any; after: any; mode: 'change' | 'retain' };
 };
 
+export type EffectCallbackFn = (changedDeps: DeepItemType) => void;
+
 export interface MetadataType {
   depsName: Array<string>;
   equalFn: { [key: string]: (item1: unknown, item2: unknown) => unknown };
 }
 
+/**
+ * Can detect exactly what and how dependencies change
+ * @param {EffectCallbackFn} effectCallback Imperative function
+ * @param {DependencyList} deps If present, effect will only activate if the values in the list
+ * @param {Partial<MetadataType> | undefined} metadata Define the way hook detect what and how dependencies change
+ */
 export function useDeepEffect(
-  effectHook: (changedDeps: DeepItemType) => void,
+  effectCallback: EffectCallbackFn,
   deps: DependencyList,
   metadata?: Partial<MetadataType>,
 ) {
@@ -32,7 +40,7 @@ export function useDeepEffect(
       };
       counter++;
     }
-    return effectHook(temp);
+    return effectCallback(temp);
     ref.current = deps;
-  }, [deps, metadata?.depsName, metadata?.equalFn, effectHook]);
+  }, [deps, metadata?.depsName, metadata?.equalFn, effectCallback]);
 }
