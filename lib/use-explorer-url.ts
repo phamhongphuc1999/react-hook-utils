@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 export type EXPLORER_TYPE = 'address' | 'transaction';
 
-const exploreConfig: {
+export const exploreConfig: {
   [chainId: number]: { address: string; transaction: string; label: string };
 } = {
   56: {
@@ -30,7 +30,7 @@ export type ExploreConfigProps = {
 
 export function getExplorerUrl(hash: string, config: ExploreConfigProps) {
   const { chainId, type: configType, baseLink } = config;
-  const type = configType ?? 'transaction';
+  const type = configType ?? 'address';
   if (exploreConfig[chainId]) {
     const _config = exploreConfig[chainId];
     if (baseLink) return { link: `${_config[type]}`, text: _config['label'] };

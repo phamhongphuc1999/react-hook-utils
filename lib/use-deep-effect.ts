@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DependencyList, useEffect, useRef } from 'react';
 
-type DeepItemType = {
+export type DeepItemType = {
   [key: string]: { before: any; after: any; mode: 'change' | 'retain' };
 };
 
-interface MetadataType {
+export interface MetadataType {
   depsName: Array<string>;
   equalFn: { [key: string]: (item1: unknown, item2: unknown) => unknown };
 }
@@ -32,7 +32,7 @@ export function useDeepEffect(
       };
       counter++;
     }
-    effectHook(temp);
+    return effectHook(temp);
     ref.current = deps;
   }, [deps, metadata?.depsName, metadata?.equalFn, effectHook]);
 }

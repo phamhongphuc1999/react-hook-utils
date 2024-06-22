@@ -1,6 +1,6 @@
 {
   "name": "@peter-present/react-hook-utils",
-  "version": "0.0.1",
+  "version": "0.0.11",
   "description": "Simple package which provides some utility hooks.",
   "type": "module",
   "main": "dist/index.js",

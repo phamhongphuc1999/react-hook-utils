@@ -1,5 +1,6 @@
-export { useDeepEffect } from './use-deep-effect';
+export { useDeepEffect, type DeepItemType, type MetadataType } from './use-deep-effect';
 export {
+  exploreConfig,
   getExplorerUrl,
   useExplorerUrl,
   type EXPLORER_TYPE,
