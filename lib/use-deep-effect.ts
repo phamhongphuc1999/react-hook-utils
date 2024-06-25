@@ -1,6 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DependencyList, useEffect, useRef } from 'react';
 
+function defaultEqualFn(item1: unknown, item2: unknown) {
+  return item1 == item2;
+}
+
 export type DeepItemType = {
   [key: string]: { before: any; after: any; mode: 'change' | 'retain' };
 };
@@ -9,7 +13,7 @@ export type EffectCallbackFn = (changedDeps: DeepItemType) => void;
 
 export interface MetadataType {
   depsName: Array<string>;
-  equalFn: { [key: string]: (item1: unknown, item2: unknown) => unknown };
+  equalFn?: { [key: string]: (item1: unknown, item2: unknown) => unknown };
 }
 
 /**
@@ -32,7 +36,7 @@ export function useDeepEffect(
     let counter = 0;
     for (const item of deps) {
       const keyName = depsName[counter] || counter;
-      const isEqualFn = equalFn[keyName];
+      const isEqualFn = equalFn[keyName] ?? defaultEqualFn;
       temp[keyName] = {
         before: ref.current?.[counter],
         after: item,
@@ -40,7 +44,7 @@ export function useDeepEffect(
       };
       counter++;
     }
-    return effectCallback(temp);
+    effectCallback(temp);
     ref.current = deps;
   }, [deps, metadata?.depsName, metadata?.equalFn, effectCallback]);
 }
