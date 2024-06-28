@@ -24,4 +24,4 @@ yarn add @peter-present/react-hook-utils
 bun add @peter-present/react-hook-utils
 ```
 
-- You can read document [here](https://github.com/phamhongphuc1999/react-hook-utils/documents/api.md)
+- You can read document [here](https://github.com/phamhongphuc1999/react-hook-utils/blob/main/documents/api.md)
