@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 export type PaginationConfigType = {
   pageIndex?: number;
@@ -15,21 +15,30 @@ export function usePagination<DataType>(data: Array<DataType>, config?: Paginati
   const itemsPerPage = config?.itemsPerPage ?? 10;
 
   const [currentPage, setCurrentPage] = useState(pageIndex);
-  const maxPage = Math.ceil(data.length / itemsPerPage);
 
-  function next() {
+  const maxPage = useMemo(() => {
+    return Math.ceil(data.length / itemsPerPage);
+  }, [data.length, itemsPerPage]);
+
+  const _data = useMemo(() => {
+    return data.slice(currentPage * itemsPerPage - itemsPerPage, currentPage * itemsPerPage);
+  }, [currentPage, data, itemsPerPage]);
+
+  const next = useCallback(() => {
     setCurrentPage((currentPage) => Math.min(currentPage + 1, maxPage));
-  }
+  }, [maxPage]);
 
-  function prev() {
+  const prev = useCallback(() => {
     setCurrentPage((currentPage) => Math.max(currentPage - 1, 1));
-  }
+  }, []);
 
-  function jump(page: number) {
-    const pageNumber = Math.max(1, page);
-    setCurrentPage(Math.min(pageNumber, maxPage));
-  }
+  const jump = useCallback(
+    (page: number) => {
+      const pageNumber = Math.max(1, page);
+      setCurrentPage(Math.min(pageNumber, maxPage));
+    },
+    [maxPage],
+  );
 
-  const _data = data.slice(currentPage * itemsPerPage - itemsPerPage, currentPage * itemsPerPage);
   return { next, prev, jump, data: _data, currentPage, maxPage };
 }

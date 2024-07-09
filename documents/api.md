@@ -16,6 +16,6 @@
 
 - Obviously, usePagination is the very helpful hook when developer must work with tables, lists that require pagination service.
 
-#### 4. [useTimout](./lib/use-timeout.ts)
+#### 4. [useTimeout](./lib/use-timeout.ts)
 
 - This hook is very straightforward. It bears no difference to the regular setTimeout method from vanilla Javascript. But this custom hook simplifies its usage, and most importantly – lets you forget about clearing the interval when you’re done using it.
