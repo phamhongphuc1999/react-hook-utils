@@ -14,6 +14,16 @@ export const exploreConfig: { [chainId: number]: ExplorerConfigType } = {
     transaction: 'https://etherscan.io/tx',
     label: 'ethscan',
   },
+  250: {
+    address: 'https://ftmscan.com/address',
+    transaction: 'https://ftmscan.com/tx',
+    label: 'ftmscan',
+  },
+  97: {
+    address: 'https://testnet.bscscan.com/address',
+    transaction: 'https://testnet.bscscan.com/tx',
+    label: 'bsctestscan',
+  },
 };
 
 export type ExploreConfigProps = {

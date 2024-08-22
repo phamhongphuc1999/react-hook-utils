@@ -41,3 +41,5 @@ next-env.d.ts
 /dist
 *.tgz
 .npmrc
+
+package-lock.json

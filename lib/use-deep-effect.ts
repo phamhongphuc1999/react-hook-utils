@@ -18,13 +18,13 @@ export interface MetadataType {
 
 /**
  * Can detect exactly what and how dependencies change
- * @param {EffectCallbackFn} effectCallback Imperative function
+ * @param {EffectCallbackFn} effect Imperative function that can return a cleanup function
  * @param {DependencyList} deps If present, effect will only activate if the values in the list
  * @param {Partial<MetadataType> | undefined} metadata Define the way hook detect what and how dependencies change
  */
 export function useDeepEffect(
-  effectCallback: EffectCallbackFn,
-  deps: DependencyList,
+  effect: EffectCallbackFn,
+  deps?: DependencyList,
   metadata?: Partial<MetadataType>,
 ) {
   const ref = useRef<DependencyList | undefined>(undefined);
@@ -34,17 +34,19 @@ export function useDeepEffect(
     const equalFn = metadata?.equalFn ?? {};
     const temp: DeepItemType = {};
     let counter = 0;
-    for (const item of deps) {
-      const keyName = depsName[counter] || counter;
-      const isEqualFn = equalFn[keyName] ?? defaultEqualFn;
-      temp[keyName] = {
-        before: ref.current?.[counter],
-        after: item,
-        mode: isEqualFn(item, ref.current?.[counter]) ? 'retain' : 'change',
-      };
-      counter++;
+    if (deps) {
+      for (const item of deps) {
+        const keyName = depsName[counter] || counter;
+        const isEqualFn = equalFn[keyName] ?? defaultEqualFn;
+        temp[keyName] = {
+          before: ref.current?.[counter],
+          after: item,
+          mode: isEqualFn(item, ref.current?.[counter]) ? 'retain' : 'change',
+        };
+        counter++;
+      }
     }
-    effectCallback(temp);
+    effect(temp);
     ref.current = deps;
-  }, [deps, metadata?.depsName, metadata?.equalFn, effectCallback]);
+  }, [deps, metadata?.depsName, metadata?.equalFn, effect]);
 }

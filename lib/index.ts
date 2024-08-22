@@ -7,5 +7,7 @@ export {
   type ExploreConfigProps,
   type ExplorerConfigType,
 } from './use-explorer-url';
+export { useMousePosition } from './use-mouse-position';
 export { usePagination, type PaginationConfigType } from './use-pagination';
+export { useScrollPosition } from './use-scroll-position';
 export { useTimeout } from './use-timeout';
