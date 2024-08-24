@@ -1,0 +1,7 @@
+{
+  "hello": "Hello",
+  "tree": {
+    "apple": "Apple"
+  },
+  "connectTo": "Connect to %{person}"
+}

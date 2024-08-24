@@ -4,6 +4,7 @@ import { ExplorerTest } from './hook/explorer-test';
 import { PaginationTest } from './hook/pagination-test';
 import { ScrollTest } from './hook/scroll-test';
 import { TimeoutTest } from './hook/timeout-test';
+import { TranslateTest } from './hook/translate-test';
 
 const config: Array<{ name: string; index: number }> = [
   { name: 'deep effect', index: 0 },
@@ -11,6 +12,7 @@ const config: Array<{ name: string; index: number }> = [
   { name: 'scroll', index: 2 },
   { name: 'pagination', index: 3 },
   { name: 'timeout', index: 4 },
+  { name: 'translate', index: 5 },
 ];
 
 export function App() {
@@ -32,6 +34,7 @@ export function App() {
       {index == 2 && <ScrollTest />}
       {index == 3 && <ExplorerTest />}
       {index == 4 && <TimeoutTest />}
+      {index == 5 && <TranslateTest />}
     </>
   );
 }

@@ -1,0 +1,7 @@
+{
+  "hello": "Xin chào",
+  "tree": {
+    "apple": "Cây táo"
+  },
+  "connectTo": "Liên hệ với %{person}"
+}
