@@ -12,7 +12,7 @@
 
 - I have worked as a `blockchain developer` for a while. Sometimes, in the coding process, i must link a `transaction hash` or an `address` to its `blockchain explorer scan` such as [BSC Scan](https://bscscan.com/), [ETH Scan](https://etherscan.io/). This hook helps developers just build the right link.
 
-#### 4. [useMousePosition](../lib/use-mouse-position.ts)
+#### 3. [useMousePosition](../lib/use-mouse-position.ts)
 
 - This useful hook help for returning mouse position.
 
@@ -27,3 +27,7 @@
 #### 6. [useTimeout](../lib/use-timeout.ts)
 
 - This hook is very straightforward. It bears no difference to the regular setTimeout method from vanilla Javascript. But this custom hook simplifies its usage, and most importantly – lets you forget about clearing the interval when you’re done using it.
+
+#### 7. [useTranslate](../lib/use-translate.ts)
+
+- This useful hook can be used for translating into a special language

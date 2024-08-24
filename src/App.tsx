@@ -2,13 +2,15 @@ import { useState } from 'react';
 import { DeepEffectTest } from './hook/deep-effect-test';
 import { ExplorerTest } from './hook/explorer-test';
 import { PaginationTest } from './hook/pagination-test';
+import { ScrollTest } from './hook/scroll-test';
 import { TimeoutTest } from './hook/timeout-test';
 
 const config: Array<{ name: string; index: number }> = [
   { name: 'deep effect', index: 0 },
   { name: 'explorer', index: 1 },
-  { name: 'pagination', index: 2 },
-  { name: 'timeout', index: 3 },
+  { name: 'scroll', index: 2 },
+  { name: 'pagination', index: 3 },
+  { name: 'timeout', index: 4 },
 ];
 
 export function App() {
@@ -27,8 +29,9 @@ export function App() {
       </div>
       {index == 0 && <DeepEffectTest />}
       {index == 1 && <PaginationTest />}
-      {index == 2 && <ExplorerTest />}
-      {index == 3 && <TimeoutTest />}
+      {index == 2 && <ScrollTest />}
+      {index == 3 && <ExplorerTest />}
+      {index == 4 && <TimeoutTest />}
     </>
   );
 }
