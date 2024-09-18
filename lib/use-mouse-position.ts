@@ -13,13 +13,15 @@ export function useMousePosition(initialLocation?: LocationType) {
   });
 
   useEffect(() => {
-    const updateMousePosition = (ev: globalThis.MouseEvent) => {
-      setPosition({ x: ev.clientX, y: ev.clientY });
-    };
-    window.addEventListener('mousemove', updateMousePosition);
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-    };
+    if (typeof window != 'undefined') {
+      const updateMousePosition = (ev: globalThis.MouseEvent) => {
+        setPosition({ x: ev.clientX, y: ev.clientY });
+      };
+      window.addEventListener('mousemove', updateMousePosition);
+      return () => {
+        window.removeEventListener('mousemove', updateMousePosition);
+      };
+    }
   }, []);
 
   return { position };

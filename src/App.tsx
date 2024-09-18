@@ -30,9 +30,9 @@ export function App() {
         ))}
       </div>
       {index == 0 && <DeepEffectTest />}
-      {index == 1 && <PaginationTest />}
+      {index == 1 && <ExplorerTest />}
       {index == 2 && <ScrollTest />}
-      {index == 3 && <ExplorerTest />}
+      {index == 3 && <PaginationTest />}
       {index == 4 && <TimeoutTest />}
       {index == 5 && <TranslateTest />}
     </>

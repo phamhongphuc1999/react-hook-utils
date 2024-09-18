@@ -1,36 +1,45 @@
 import { useMemo } from 'react';
 
 export type EXPLORER_TYPE = 'address' | 'transaction';
-export type ExplorerConfigType = { address: string; transaction: string; label: string };
+export type ExplorerConfigType = {
+  address: `${string}%{hash}${string}`;
+  transaction: `${string}%{hash}${string}`;
+  baseUrl: string;
+  label: string;
+};
 
-export const exploreConfig: { [chainId: number]: ExplorerConfigType } = {
+export const exploreConfig: { [chainId: string]: ExplorerConfigType } = {
   56: {
-    address: 'https://bscscan.com/address',
-    transaction: 'https://bscscan.com/tx',
+    address: 'https://bscscan.com/address/%{hash}',
+    transaction: 'https://bscscan.com/tx/%{hash}',
+    baseUrl: 'https://bscscan.com',
     label: 'bscscan',
   },
   1: {
-    address: 'https://etherscan.io/address',
-    transaction: 'https://etherscan.io/tx',
+    address: 'https://etherscan.io/address/%{hash}',
+    transaction: 'https://etherscan.io/tx/%{hash}',
+    baseUrl: 'https://etherscan.io',
     label: 'ethscan',
   },
   250: {
-    address: 'https://ftmscan.com/address',
-    transaction: 'https://ftmscan.com/tx',
+    address: 'https://ftmscan.com/address/%{hash}',
+    transaction: 'https://ftmscan.com/tx/%{hash}',
+    baseUrl: 'https://ftmscan.com',
     label: 'ftmscan',
   },
   97: {
-    address: 'https://testnet.bscscan.com/address',
-    transaction: 'https://testnet.bscscan.com/tx',
+    address: 'https://testnet.bscscan.com/address/%{hash}',
+    transaction: 'https://testnet.bscscan.com/tx/%{hash}',
+    baseUrl: 'https://testnet.bscscan.com',
     label: 'bsctestscan',
   },
 };
 
 export type ExploreConfigProps = {
-  chainId: number;
+  chainId: number | string;
   type?: EXPLORER_TYPE;
   baseLink?: boolean;
-  exploreConfig?: { [chainId: number]: ExplorerConfigType };
+  exploreConfig?: { [chainId: string]: ExplorerConfigType };
 };
 
 /**
@@ -46,8 +55,8 @@ export function getExplorerUrl(hash: string, config: ExploreConfigProps) {
     : exploreConfig;
   if (realExplorerConfig[chainId]) {
     const _config = realExplorerConfig[chainId];
-    if (baseLink) return { link: `${_config[type]}`, text: _config['label'] };
-    return { link: `${_config[type]}/${hash}`, text: _config['label'] };
+    if (baseLink) return { link: _config.baseUrl, text: _config['label'] };
+    return { link: _config[type].replace('%{hash}', hash), text: _config['label'] };
   } else return { link: undefined, text: '' };
 }
 

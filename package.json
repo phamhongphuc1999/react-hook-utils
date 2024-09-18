@@ -1,6 +1,6 @@
 {
   "name": "@peter-present/react-hook-utils",
-  "version": "0.0.132",
+  "version": "0.0.133",
   "description": "Simple package which provides some utility hooks.",
   "type": "module",
   "main": "dist/index.js",
@@ -27,7 +27,7 @@
   "author": "phamhongphuc1999",
   "license": "ISC",
   "scripts": {
-    "dev": "vite --host --port 3000",
+    "dev": "vite --host --port 3456",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
