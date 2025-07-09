@@ -18,6 +18,7 @@ export function useTimeout(effectCallback: () => void, delay: number) {
   }, [delay]);
 
   const clear = useCallback(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     timeoutRef.current && clearTimeout(timeoutRef.current);
   }, []);
 
